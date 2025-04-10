@@ -50,4 +50,4 @@ def get_movie_info():
         print("Sorry, no results found!")
 
 # Run the program
-get_movie_info()
+

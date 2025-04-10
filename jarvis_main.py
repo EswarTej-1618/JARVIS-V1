@@ -224,12 +224,14 @@ if __name__ == "__main__":
                 elif "news" in query:
                     from NewsRead import latestnews
                     latestnews()
-                
+                #Movie Search function using IMDB
+                elif "movie" in query:
+                    from Imdb import get_movie_info
+                    get_movie_info()
                 #calculator function using jarvis 
                 elif "calculate" in query:
                     from calculateNum import WolfRamAlpha
                     from calculateNum import Calc
-                    query = query.replace("calculate","")
                     query = query.replace("jarvis","")
                     Calc(query)
                 
@@ -262,11 +264,12 @@ if __name__ == "__main__":
                     speak("tell me the name of your city")
                     city = input("Enter your city name: ")
                     speak(f"getting weather forecast for your city {city}")
-                    weather , temp , feels_like = weather_forecast(city)
+                    weather , temp , feels_like , wind_speed = weather_forecast(city)
                     speak(f"the current temperature is {temp}, but it feels like {feels_like}")
                     speak(f" Also the weather report talks about {weather}")
+                    speak(f"The wind speed is {wind_speed}")
                     speak("I am printing weather information on screen")
-                    print(f"Description : {weather}\nTemperature : {temp}\nFeels Like : {feels_like}")
+                    print(f"Description : {weather}\nTemperature : {temp}\nFeels Like : {feels_like}\nWind Speed : {wind_speed}")
                 #screenshot function
                 elif "screenshot" in query:
                     im = pyautogui.screenshot()
@@ -355,6 +358,12 @@ if __name__ == "__main__":
                     query = query.replace("jarvis","")
                     query = query.replace("translate","")
                     translategl(query)
+                #GeneralKnowledge Who is ()
+                elif any(keyword in query for keyword in ("who is", "what is", "which is")):
+                    from calculateNum import WolfRamAlpha
+                    from calculateNum import Whois
+                    query = query.replace("jarvis","")
+                    Whois(query)
                 
                 #Finally sleep function
                 elif "finally sleep" in query:

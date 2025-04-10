@@ -7,5 +7,6 @@ def weather_forecast(city):
     weather = res["weather"][0]["main"]
     temp = res["main"]["temp"]
     feels_like = res["main"]["feels_like"]
-    return weather,f"{temp-273.15}°C",f"{feels_like-273.15}°C"
+    wind_speed = res["wind"]["speed"]
+    return weather,f"{round(temp-273.15,2)}°C",f"{round(feels_like-273.15,2)}°C",f"{wind_speed} m/s"
     

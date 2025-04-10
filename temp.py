@@ -1,8 +1,3 @@
-
-# python version must be btwn  3.10.9  or 3.11.9
-#else you will face diffiulties in installing this pacakage 
-
-
 import pyttsx3
 from online import find_myip
 
@@ -29,7 +24,8 @@ def weather_forecast(city):
     weather = res["weather"][0]["main"]
     temp = res["main"]["temp"]
     feels_like = res["main"]["feels_like"]
-    return weather,f"{temp-273.15}°C",f"{feels_like-273.15}°C"
+    wind_speed = res["wind"]["speed"]
+    return weather,f"{round(temp-273.15,2)}°C",f"{round(feels_like-273.15,2)}°C",f"{wind_speed} m/s"
     
 
 if __name__ == "__main__":
@@ -37,10 +33,11 @@ if __name__ == "__main__":
     speak("tell me the name of your city")
     city = input("Enter your city name: ")
     speak(f"getting weather forecast for your city {city}")
-    weather , temp , feels_like = weather_forecast(city)
+    weather , temp , feels_like , wind_speed = weather_forecast(city)
     speak(f"the current temperature is {temp}, but it feels like {feels_like}")
     speak(f" Also the weather report talks about {weather}")
+    speak(f"The wind speed is {wind_speed}")
     speak("I am printing weather information on screen")
-    print(f"Description : {weather}\nTemperature : {temp}\nFeels Like : {feels_like}")
+    print(f"Description : {weather}\nTemperature : {temp}\nFeels Like : {feels_like}\nWind Speed : {wind_speed}")
 
 
