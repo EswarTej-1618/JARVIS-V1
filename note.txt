@@ -1,0 +1,34 @@
+open current project 
+
+import speech_recognition as sr
+import pyttsx3
+
+# Engine setup
+engine = pyttsx3.init('sapi5')
+voices = engine.getProperty('voices')
+engine.setProperty('voice', voices[1].id)
+engine.setProperty('rate', 170)
+
+# Function for text-to-speech
+def speak(text):
+    engine.say(text)
+    engine.runAndWait()
+
+# Function for voice commands (listens until speech ends)
+def takeCommand():
+    r = sr.Recognizer()
+    with sr.Microphone() as source:
+        print("Listening...")
+        r.adjust_for_ambient_noise(source)  # Adjusts to background noise for better recognition
+        audio = r.listen(source)  # Listens until the user stops speaking
+
+    try:
+        print("Recognizing...")
+        query = r.recognize_google(audio, language='en-in')
+        print(f"You said: {query}\n")
+    except Exception as e:
+        print("Could you please say that again, sir?")
+        return "None"
+    
+    return query
+

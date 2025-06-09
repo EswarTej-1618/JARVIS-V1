@@ -44,7 +44,7 @@ def takeCommand():
 def sendMessage():
     contacts = {
         "me": "+91xxxxxxxxxxxx",
-        "sathwik": "+91xxxxxxxxxx"
+        "Tej": "+91xxxxxxxxxx"
     }
 
     speak("Whom do you want to message, sir?")
@@ -58,8 +58,17 @@ def sendMessage():
         message = takeCommand() if use_voice_command_message else input("Enter the message: ")
         
         # Open WhatsApp Web
+        # pyautogui.hotkey("winleft")  
+        # sleep(1)
+        # pyautogui.write("Brave")
+        # sleep(1)
+        # pyautogui.press("enter")
+        # sleep(3) 
+        
+        # url = f"https://web.whatsapp.com/send?phone={contacts[name]}&text={message}"
         webbrowser.open(f"https://web.whatsapp.com/send?phone={contacts[name]}&text={message}", new=2)
         
+        # webbrowser.open(url, new=2)
         # Inform user and wait for WhatsApp Web to load
         speak("Please scan the QR code if not already logged in. Message will be sent momentarily.")
         sleep(45)  # Wait for 45 seconds for the page to load and QR code to be scanned if needed

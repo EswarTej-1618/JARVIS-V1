@@ -6,6 +6,7 @@ import datetime
 import os
 import pyautogui
 import random
+import time
 import webbrowser
 from plyer import notification
 from pygame import mixer
@@ -240,6 +241,22 @@ if __name__ == "__main__":
                     from Whatsapp import sendMessage
                     sendMessage()
                 
+                # Email function for sending emails
+                elif "email" in query:
+                    from SendEmail import send_email
+                    speak("on what emailaddress you want to send the email sir? please enter it in terminal:")
+                    receiver_add = input("Enter the email address: ")
+                    speak("what is the subject of the email sir?")
+                    subject = takeCommand().capitalize()
+                    speak("what is the message sir?")
+                    message = takeCommand().capitalize()
+                    if send_email(receiver_add,subject,message):
+                        speak("I have sent the email successfully sir!")
+                        print("I have sent the email successfully sir!")
+                    else:
+                        speak("Sorry sir, something went wrong ,I am not able to send the email")
+                        print("Sorry sir, something went wrong ,I am not able to send the email")
+                
                 #Alarm set function call
                 elif "set an alarm" in query:
                     print("input time example :- 10 and 10 and 10")
@@ -318,10 +335,29 @@ if __name__ == "__main__":
                     else :
                         webbrowser.open("https://www.youtube.com/watch?v=MP6SrbIeUWc")
                 
+                # using Ai nemo
+                elif "nemo" in query:
+                    from nemo import AI
+                    AI()
+                
+                # gemini Ai integration 
+                elif "gemini" in query:
+                    from IntegrateAi import Gemini
+                    Gemini()
+                
+                # playing games
                 elif "start a game" in query:
                     from game import game_play
                     game_play()
                 
+                # playing music using spotify
+                elif "music" in query:
+                    import spotify
+                    speak("Which song would you like to play? sir")
+                    query = spotify.takeCommand().lower()
+                    song = spotify.clean_query(query)
+                    spotify.play_on_spotify(song)
+
                 #The best function of JARVIS so called the FOCUS MODE
                 elif "focus mode" in query:
                     speak("sir are you sure that you want to enter focus mode! Enter [1 for YES] /[2 for NO]")
@@ -364,7 +400,12 @@ if __name__ == "__main__":
                     from calculateNum import Whois
                     query = query.replace("jarvis","")
                     Whois(query)
-                
+                    
+                # subscribe funtion 
+                elif "subscribe" in query:
+                    from subscribe import Subscribe
+                    Subscribe()
+                    
                 #Finally sleep function
                 elif "finally sleep" in query:
                     speak("Going to sleep sir, Thank you I'll be back Soon!")
